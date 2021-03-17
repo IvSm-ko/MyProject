@@ -1,2 +1,3 @@
-# EPAM DevOps online Winter 2020/2021
-## FinalTask
+# maven-project
+
+Simple Maven Project
