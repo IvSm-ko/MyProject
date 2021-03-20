@@ -1,2 +1,3 @@
-.aws
+CONFIGs/**
+.aws/**
 credentials
