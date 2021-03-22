@@ -6,7 +6,7 @@
   <parent>
     <groupId>com.example.maven-project</groupId>
     <artifactId>maven-project</artifactId>
-    <version>1.0.-FinalTask</version>
+    <version>1.0.${v}-FinalTask</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
@@ -16,7 +16,7 @@
   <description>Webapp.</description>
 
   <build>
-    <finalName>${v}-${project.artifactId}</finalName>
+    <finalName>${project.artifactId}</finalName>
 
     <plugins>
       <plugin>
