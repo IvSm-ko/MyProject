@@ -16,7 +16,7 @@
   <description>Webapp.</description>
 
   <build>
-    <finalName>${v}$-{project.artifactId}</finalName>
+    <finalName>${v}-${project.artifactId}</finalName>
 
     <plugins>
       <plugin>
