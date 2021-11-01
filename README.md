@@ -1,6 +1,5 @@
 # simple-java-maven-app
 
-
 Simple Maven Project
 
 This repository is for the
