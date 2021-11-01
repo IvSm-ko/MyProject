@@ -3,7 +3,11 @@ package com.mycompany.app;
 /**
  * Hello world!
  */
-z
+public class App
+{
+
+    private final String message = "Hello World!";
+
     public App() {}
 
     public static void main(String[] args) {
