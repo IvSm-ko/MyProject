@@ -45,4 +45,9 @@ public class AppTest
         System.setOut(null);
     }
 
+    @Test
+    public void check() {
+        throw new RuntimeException("I wanted this");
+    }
+    
 }
