@@ -46,9 +46,9 @@ public class AppTest
     }
 
     
-//     @Test
-//     public void check() {
-//         throw new RuntimeException("I wanted this");
-//     }
+    @Test
+    public void check() {
+        throw new RuntimeException("I wanted this");
+    }
    
 }
