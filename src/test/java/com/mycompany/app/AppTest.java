@@ -44,5 +44,10 @@ public class AppTest
     public void cleanUpStreams() {
         System.setOut(null);
     }
+    
+     @Test
+     public void check() {
+         throw new RuntimeException("I wanted this");
+     }
 
 }
