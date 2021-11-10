@@ -20,7 +20,7 @@ pipeline {
 //                 gitHubPRStatus githubPRMessage('${GITHUB_PR_COND_REF} run started')
 //             }    
 //         }
-        stage(' --- Testing Java Sources --- ') {
+        stage('--- Testing Java Sources ---') {
             steps {
                 sh 'mvn clean'
             }
