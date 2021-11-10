@@ -50,12 +50,12 @@ pipeline {
         always {
             // junit 'target/surefire-reports/*.xml'
             // script { 
-            githubPRStatusPublisher buildMessage: message(failureMsg: githubPRMessage('Can\'t set status; build failed.'),
-                successMsg: githubPRMessage('Can\'t set status; build succeeded.')),
-                errorHandler: statusOnPublisherError('UNSTABLE'),
-                statusMsg: githubPRMessage('${GITHUB_PR_COND_REF} run ended'),
-                statusVerifier: allowRunOnStatus('UNSTABLE'),
-                unstableAs: 'FAILURE'
+//             githubPRStatusPublisher buildMessage: message(failureMsg: githubPRMessage('Can\'t set status; build failed.'),
+//                 successMsg: githubPRMessage('Can\'t set status; build succeeded.')),
+//                 errorHandler: statusOnPublisherError('UNSTABLE'),
+//                 statusMsg: githubPRMessage('${GITHUB_PR_COND_REF} run ended'),
+//                 statusVerifier: allowRunOnStatus('UNSTABLE'),
+//                 unstableAs: 'FAILURE'
             githubPRComment comment:
                 githubPRMessage('Build ${BUILD_NUMBER} ${BUILD_STATUS}'), 
                 statusVerifier: allowRunOnStatus("SUCCESS"),
