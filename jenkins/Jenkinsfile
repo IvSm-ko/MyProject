@@ -6,60 +6,15 @@ pipeline {
         git 'Default'
     }
     stages {
-        stage('--- CheckOut_Repo ---') {
-            steps {
-                // git branch: '',
-                //     fetch: '+refs/pull/*:refs/remotes/origin/pr/*',
-                //     credentialsId: 'a75c7a3e-4e70-482c-b0ef-1d11158ba4d3',
-                //     url: 'https://github.com/IvSm-ko/MyProject.git'
-                // resolveScm source:
-                //     github(credentialsId: 'a75c7a3e-4e70-482c-b0ef-1d11158ba4d3',
-                //         id: '_', repoOwner: 'IvSm-ko', repository: 'MyProject',
-                //         traits: [
-                //         gitHubBranchDiscovery(2),
-                //             gitHubPullRequestDiscovery(2),
-                //             gitHubForkDiscovery(strategyId: 2,
-                //             trust: gitHubTrustContributors())]),
-                //         targets: []
-                
-                checkout([
-                    $class: 'GitSCM', 
-                    branches: [[name: '**']],
-                    extensions: [],
-                    userRemoteConfigs: [[
-                        credentialsId:'a75c7a3e-4e70-482c-b0ef-1d11158ba4d3',
-                        refspec: '+refs/pull/*:refs/remotes/origin/pr/*', url: 'https://github.com/IvSm-ko/MyProject.git'
-                    ]]
-                ])
-                gitHubPRStatus githubPRMessage('${GITHUB_PR_COND_REF} run started')
-            }    
-        }
-        stage('--- Clean ---') {
+        stage('Testing Java Sources') {
             steps {
                 sh 'mvn clean'
-            }
-        }
-        stage('Test') { 
-            steps {
+//             }
+//         }
+//         stage('Test') { 
+//             steps {
                 sh 'mvn test'
             }
-            
-        }
-    }
-    post {
-        always {
-            // junit 'target/surefire-reports/*.xml'
-            // script { 
-            githubPRStatusPublisher buildMessage: message(failureMsg: githubPRMessage('Can\'t set status; build failed.'),
-                successMsg: githubPRMessage('Can\'t set status; build succeeded.')),
-                errorHandler: statusOnPublisherError('UNSTABLE'),
-                statusMsg: githubPRMessage('${GITHUB_PR_COND_REF} run ended'),
-                statusVerifier: allowRunOnStatus('UNSTABLE'),
-                unstableAs: 'FAILURE'
-            githubPRComment comment:
-                githubPRMessage('Build ${BUILD_NUMBER} ${BUILD_STATUS}'), 
-                statusVerifier: allowRunOnStatus("SUCCESS"),
-                errorHandler: statusOnPublisherError("UNSTABLE")
         }
     }
 }
