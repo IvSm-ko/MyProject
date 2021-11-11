@@ -25,25 +25,25 @@ pipeline {
         stage ('Testing Python'){
             steps {
                 echo '--- Creating Python3 Virtual Environment ---'
-                VIRTUAL_ENV_NAME='virtual-environment'
-                python3 -m venv $VIRTUAL_ENV_NAME
+                sh 'VIRTUAL_ENV_NAME=\'virtual-environment\'
+                    Python3 -m venv $VIRTUAL_ENV_NAME'
             }
             steps{
                 echo '--- Activating Virtual Environmet ---'
-                source $VIRTUAL_ENV_NAME/bin/activate
+                sh 'source $VIRTUAL_ENV_NAME/bin/activate'
             }
             steps{
                 echo '--- Installing requirements ---'
-                pip install -r ./bwg-cli/requirements.txt
+                sh 'pip install -r ./bwg-cli/requirements.txt'
             }
             steps{
-                cd /var/lib/jenkins/workspace/$JOB_NAME/
+                sh 'cd /var/lib/jenkins/workspace/$JOB_NAME/'
                 echo '--- Starting Tests ---'
-                pytest ./bwg-cli/test --junitxml=./xmlReport/output.xmlReport
+                sh 'pytest ./bwg-cli/test --junitxml=./xmlReport/output.xmlReport'
             }
             steps {
                 echo '--- Deaktivating Virtual Environment ---'
-                deactivate
+                sh 'deactivate'
             }
         }
     }
