@@ -16,7 +16,7 @@ pipeline {
 //             steps {
 //                 sh 'pip install -r requirements.txt'
 //             }
-//         }
+        // }
 //         stage ('Testing Python'){
 //             steps {
 //                 sh 'python unit-test.py'
@@ -24,24 +24,26 @@ pipeline {
 //          
         stage ('Testing Python'){
             steps {
-                sh '''#!/bin/bash
-                    echo \'--- Creating Python3 Virtual Environment ---\'
+                sh 'echo \'--- Creating Python3 Virtual Environment ---\'
                     VIRTUAL_ENV_NAME=\'virtual-environment\'
-                    python3 -m venv $VIRTUAL_ENV_NAME
-
-                    echo \'--- Activating Virtual Environmet ---\'
-                    source $VIRTUAL_ENV_NAME/bin/activate
-
-                    echo \'--- Installing requirements ---\'
-                    pip install -r ./bwg-cli/requirements.txt
-
-                    cd /var/lib/jenkins/workspace/$JOB_NAME/
-
+                    Python3 -m venv $VIRTUAL_ENV_NAME'
+            }
+            steps{
+                sh 'echo \'--- Activating Virtual Environmet ---\'
+                    source $VIRTUAL_ENV_NAME/bin/activate'
+            }
+            steps{
+                sh 'echo \'--- Installing requirements ---\'
+                    pip install -r ./bwg-cli/requirements.txt'
+            }
+            steps{
+                sh 'cd /var/lib/jenkins/workspace/$JOB_NAME/
                     echo \'--- Starting Tests ---\'
-                    pytest ./bwg-cli/test --junitxml=./xmlReport/output.xmlReport
-
-                    echo \'--- Deaktivating Virtual Environment ---\'
-                    deactivate'''
+                    pytest ./bwg-cli/test --junitxml=./xmlReport/output.xmlReport'
+            }
+            steps {
+                sh 'echo \'--- Deaktivating Virtual Environment ---\'
+                    deactivate'
             }
         }
     }
