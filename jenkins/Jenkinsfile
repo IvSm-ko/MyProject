@@ -26,7 +26,7 @@ pipeline {
             steps {
                 echo '--- Creating Python3 Virtual Environment ---'
                 sh '''#!bin/bash/
-                    VIRTUAL_ENV_NAME=\'virtual-environment\'
+                    VIRTUAL_ENV_NAME=virtual-environment
                     python3 -m venv $VIRTUAL_ENV_NAME'''
                 echo '--- Activating Virtual Environmet ---'
                 sh '. $VIRTUAL_ENV_NAME/bin/activate'
