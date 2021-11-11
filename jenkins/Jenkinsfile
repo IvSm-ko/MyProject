@@ -31,10 +31,10 @@ pipeline {
                     . .env/bin/activate'''
                 echo '--- Installing requirements ---'
                 sh'''. .env/bin/activate
-                    pip install -r ./bwg-cli/requirements.txt
+                    pip3 install -r ./bwg-cli/requirements.txt
                     cd /var/lib/jenkins/workspace/$JOB_NAME/'''
                 echo '--- Starting Tests ---'
-                sh'''. .env/bin/activate
+                sh'''. .env`/bin/activate
                     pytest ./bwg-cli/test --junitxml=./Report/output.xml
                     echo \'--- Deaktivating Virtual Environment ---\'
                     deactivate'''
