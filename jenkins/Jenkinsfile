@@ -25,11 +25,12 @@ pipeline {
         stage ('Testing Python'){
             steps {
                 echo '--- Creating Python3 Virtual Environment ---'
+                sh 'printenv'
                 sh '''#!bin/bash
-                    VIRTUAL_ENV_NAME=virtual-environment
+                    VIRTUAL_ENV_NAME=\'virtual-environment\'
                     python3 -m venv $VIRTUAL_ENV_NAME
                     printenv
-                    echo '--- Activating Virtual Environmet ---'
+                    echo \'--- Activating Virtual Environmet ---\'
                     . $VIRTUAL_ENV_NAME/bin/activate'''
                 echo '--- Installing requirements ---'
                 sh '''. $VIRTUAL_ENV_NAME/bin/activate
@@ -38,7 +39,7 @@ pipeline {
                 echo '--- Starting Tests ---'
                 sh '''. $VIRTUAL_ENV_NAME/bin/activate
                     pytest ./bwg-cli/test --junitxml=./Report/output.xml
-                    echo '--- Deaktivating Virtual Environment ---'
+                    echo \'--- Deaktivating Virtual Environment ---\'
                     deactivate'''
             }
         }
