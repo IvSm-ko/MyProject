@@ -25,11 +25,12 @@ pipeline {
         stage ('Testing Python'){
             steps {
                 echo '--- Creating Python3 Virtual Environment ---'
-                sh '''#!bin/bash/
+                sh '''#!bin/bash
                     VIRTUAL_ENV_NAME=virtual-environment
-                    python3 -m venv $VIRTUAL_ENV_NAME'''
-                echo '--- Activating Virtual Environmet ---'
-                sh '. $VIRTUAL_ENV_NAME/bin/activate'
+                    python3 -m venv $VIRTUAL_ENV_NAME
+                    printenv
+                    echo '--- Activating Virtual Environmet ---'
+                    . $VIRTUAL_ENV_NAME/bin/activate'''
                 echo '--- Installing requirements ---'
                 sh '''. $VIRTUAL_ENV_NAME/bin/activate
                     pip install -r ./bwg-cli/requirements.txt
