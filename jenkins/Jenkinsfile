@@ -28,9 +28,9 @@ pipeline {
                 sh 'printenv'
                 sh'''VIRTUAL_ENV_NAME=\'virtual-environment\'
                     python3 -m venv $VIRTUAL_ENV_NAME
-                    printenv
                     echo \'--- Activating Virtual Environmet ---\'
-                    source $VIRTUAL_ENV_NAME/bin/activate'''
+                    . $VIRTUAL_ENV_NAME/bin/activate
+                    printenv'''
                 echo '--- Installing requirements ---'
                 sh'''. $VIRTUAL_ENV_NAME/bin/activate
                     pip install -r ./bwg-cli/requirements.txt
