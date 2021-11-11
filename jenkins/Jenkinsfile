@@ -25,8 +25,8 @@ pipeline {
         stage ('Testing Python'){
             steps {
                 echo '--- Creating Python3 Virtual Environment ---'
-                sh 'VIRTUAL_ENV_NAME=\'virtual-environment\'
-                    Python3 -m venv $VIRTUAL_ENV_NAME'
+                sh '''VIRTUAL_ENV_NAME=\'virtual-environment\'
+                    Python3 -m venv $VIRTUAL_ENV_NAME'''
             }
             steps{
                 echo '--- Activating Virtual Environmet ---'
