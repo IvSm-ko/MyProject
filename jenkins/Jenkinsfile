@@ -6,10 +6,36 @@ pipeline {
         git 'Default'
     }
     stages {
-        stage('--- Testing Java Sources ---') {
+        stage('Testing Java') {
             steps {
                 sh 'mvn clean'
                 sh 'mvn test'
+            }
+        }
+//         stage('build') {
+//             steps {
+//                 sh 'pip install -r requirements.txt'
+//             }
+        // }
+//         stage ('Testing Python'){
+//             steps {
+//                 sh 'python unit-test.py'
+//             }
+//          
+        stage ('Testing Python'){
+            steps {
+                echo '--- Creating Python3 Virtual Environment ---'
+                sh '''VIRTUAL_ENV_NAME=\'virtual-environment\'
+                    python3 -m venv $VIRTUAL_ENV_NAME'''
+                echo '--- Activating Virtual Environmet ---'
+                sh 'source $VIRTUAL_ENV_NAME/bin/activate'
+                echo '--- Installing requirements ---'
+                sh 'pip install -r ./bwg-cli/requirements.txt'
+                sh 'cd /var/lib/jenkins/workspace/$JOB_NAME/'
+                echo '--- Starting Tests ---'
+                sh 'pytest ./bwg-cli/test --junitxml=./xmlReport/output.xmlReport'
+                echo '--- Deaktivating Virtual Environment ---'
+                sh 'deactivate'
             }
         }
     }
