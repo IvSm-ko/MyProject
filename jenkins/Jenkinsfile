@@ -25,19 +25,12 @@ pipeline {
         stage ('Testing Python'){
             steps {
                 echo '--- Creating Python3 Virtual Environment ---'
-                // sh 'printenv'
-                // sh'''python3 -m venv $VIRTUAL_ENV_NAME
-                //     echo \'--- Activating Virtual Environmet ---\'
-                //     . $VIRTUAL_ENV_NAME/bin/activate
-                //     printenv'''
-
-                sh'''PATH=$WORKSPACE/venv/bin:/usr/local/bin:$PATH
-                    if [ ! -d "venv" ]; then
-                    virtualenv --python=python3.7 venv
-                    fi
-                    . $WORKSPACE/venv/bin/activate'''
+                sh 'printenv'
+                sh '''python3 -m venv .env
+                    echo \'--- Activating Virtual Environmet ---\'
+                    . .env/bin/activate'''
                 echo '--- Installing requirements ---'
-                sh'''. $WORKSPACE/venv/bin/activate
+                sh'''. $VIRTUAL_ENV_NAME/bin/activate
                     pip install -r ./bwg-cli/requirements.txt
                     cd /var/lib/jenkins/workspace/$JOB_NAME/'''
                 echo '--- Starting Tests ---'
