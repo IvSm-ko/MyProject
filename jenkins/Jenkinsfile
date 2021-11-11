@@ -27,6 +27,7 @@ pipeline {
                 echo '--- Creating Python3 Virtual Environment ---'
                 sh 'printenv'
                 sh '''python3 -m venv .env
+                    ls
                     echo \'--- Activating Virtual Environmet ---\'
                     . .env/bin/activate'''
                 echo '--- Installing requirements ---'
