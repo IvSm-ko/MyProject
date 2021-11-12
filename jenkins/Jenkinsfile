@@ -27,15 +27,14 @@ pipeline {
                 echo '--- Creating Python3 Virtual Environment ---'
                 sh 'printenv'
                 sh '''python3 -m venv .env
-                    ls
                     echo \'--- Activating Virtual Environmet ---\'
-                    . .env/bin/activate'''
+                    . $WORKSPACE/env/bin/activate'''
                 echo '--- Installing requirements ---'
-                sh'''. .env/bin/activate
+                sh'''. $WORKSPACE/env/bin/activate
                     pip3 install -r ./bwg-cli/requirements.txt
                     cd /var/lib/jenkins/workspace/$JOB_NAME/'''
                 echo '--- Starting Tests ---'
-                sh'''. .env`/bin/activate
+                sh'''. $WORKSPACE/env/bin/activate
                     pytest ./bwg-cli/test --junitxml=./Report/output.xml
                     echo \'--- Deaktivating Virtual Environment ---\'
                     deactivate'''
